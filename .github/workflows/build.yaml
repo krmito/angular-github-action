@@ -27,13 +27,11 @@ jobs:
         run: npm install -g @angular/cli@15.0.3
 
       - name: Run tests with coverage
-        run: |
-          npx jest --coverage
-          if [ $? -ne 0 ]; then
-            echo "Failed to generate coverage report, stopping workflow..."
-            exit 1;
-          fi
+        run: npx jest --coverage
 
+      - name: Check test status
+        if: ${{ failure() }}
+        run: echo "Tests failed, stopping workflow..." && exit 1
           
  #     - name: Running Unit Tests
  #       run: |
