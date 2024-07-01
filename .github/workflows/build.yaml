@@ -29,11 +29,14 @@ jobs:
       - name: Run tests with coverage
         run: npm test -- --coverage --coverageReporters=text-lcov | tee coverage.lcov
 
+      - name: Generate HTML coverage report
+        run: npx jest --coverage && npx jest-html-reporters --coverage-directory=coverage --report-directory=coverage/html-report
+
       - name: Upload coverage report
         uses: actions/upload-artifact@v2
         with:
           name: coverage-report
-          path: coverage.lcov
+          path: coverage/html-report/
           
  #     - name: Running Unit Tests
  #       run: |
