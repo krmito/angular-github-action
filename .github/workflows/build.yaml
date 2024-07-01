@@ -31,7 +31,9 @@ jobs:
 
       - name: Check test status
         if: ${{ failure() }}
-        run: echo "Tests failed, stopping workflow..." && exit 1
+        run: |
+          Write-Host "Tests failed, stopping workflow..."
+          exit 1  # Esto finaliza el flujo de trabajo con un código de salida no exitoso
           
  #     - name: Running Unit Tests
  #       run: |
